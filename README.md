@@ -94,7 +94,7 @@ The following table describes the POST create job response parameters:
 
 ## PUT upload file
 
-Use this endpoint to upload a file that will be associated with a job ID. This file can be tsv, tab, or JSON.
+Use this endpoint to upload a file that will be associated with the job ID created with the POST create job endpoint. This file can be tsv, tab, or JSON.
 
 `PUT https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/job/import/uploadFile/{API_JOB_ID}`
 
@@ -113,11 +113,11 @@ The following table describes the PUT upload file request parameters:
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
-| `api_job_id` | required | string | The API Job ID for uploading the file |
+| `api_job_id` | required | string | The API job ID for uploading the file |
 
 ### Payload
 
-```JSON
+```
 Content-Type: multipart/form-data
 Key: file
 Value: file path
