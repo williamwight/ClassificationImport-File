@@ -119,8 +119,8 @@ The following table describes the PUT upload file request parameters:
 
 ```
 Content-Type: multipart/form-data
-Key: file
-Value: file path
+Key: {FILE_NAME}
+Value: {FILE_PATH}
 ```
 
 ### Response Parameters
@@ -129,7 +129,7 @@ No response parameters are returned. A `200` status code indicates a successful 
 
 ## POST commit job
 
-Use this endpoint to commit the changes of a specified job ID. This endpoint concludes the process of uploading a file.
+Use this endpoint to commit the changes of a specified job ID. This endpoint finalizes the file uploading process.
 
 `POST https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/job/import/commitApiJob/{API_JOB_ID}`
 
@@ -148,8 +148,10 @@ The following table describes the POST commit job request parameters:
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
-| `api_job_id` | required | string | The API Job ID for uploading the file |
+| `api_job_id` | required | string | The API job ID for uploading the file |
 
 ### Response Parameters
 
 No response parameters are returned. A `200` status code indicates a successful commit.
+
+After importing your classification datasets you can export them to other applications. [Analytics classifications APIs guide](classifications/index.md)
