@@ -13,7 +13,7 @@ To import an API classification by uploading a file, you follow a three-step pro
 2. Upload a file using the PUT upload file endpoint.
 3. Commit your upload using the POST commit job endpoint.
 
-The endpoints described in this guide are routed through analytics.adobe.io. To use them, you will need to first create a client with access to the Adobe Developer Console. For more information, refer to [Getting started with the Analytics API](../../index.md).
+The endpoints described in this guide are routed through analytics.adobe.io. To use them, you will need to first create a client with access to the Adobe Developer Console. For more information, refer to [Getting started with the Analytics API](src/pages/guides/endpoints/classifications/index.md).
 
 ## POST create job
 
