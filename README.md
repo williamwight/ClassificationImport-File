@@ -17,7 +17,7 @@ The endpoints described in this guide are routed through analytics.adobe.io. To 
 
 ## POST create job
 
-Use this endpoint to create an import job for a classification dataset. Creating an import job is required to produce a job ID that can be associated with an uploaded dataset file.
+Use this endpoint to create an import job for a classification dataset. Creating an import job is required to produce a job ID that can be associated with an uploaded dataset file. 
 
 `POST https://analytics.adobe.io/api/{GLOBALCOMPANYID}/classification/job/import/createApiJob/{DATASET_ID}`
 
@@ -94,7 +94,7 @@ The following table describes the POST create job response parameters:
 
 ## PUT upload file
 
-Use this endpoint to upload a file that will be associated with the job ID created with the POST create job endpoint. This file can be tsv, tab, or JSON.
+Use this endpoint to upload a file that will be associated with the job ID created with the POST create job endpoint. This file can be tsv, tab, or JSON. For more information on how to structure your classification files, see [Classification data files]
 
 `PUT https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/job/import/uploadFile/{API_JOB_ID}`
 
