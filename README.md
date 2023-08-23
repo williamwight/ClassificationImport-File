@@ -155,3 +155,7 @@ The following table describes the POST commit job request parameters:
 No response parameters are returned. A `200` status code indicates a successful commit.
 
 After importing your classification datasets you can export them to other applications. [Analytics classifications APIs guide](classifications/index.md)
+
+## API status codes
+
+For a description of API status codes and tips for troubleshooting, see the [Platform FAQ and troubleshooting guide](https://experienceleague.adobe.com/docs/experience-platform/landing/troubleshooting.html#api-status-codes).
