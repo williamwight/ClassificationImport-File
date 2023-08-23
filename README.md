@@ -17,7 +17,7 @@ The endpoints described in this guide are routed through analytics.adobe.io. To 
 
 ## POST create job
 
-Use this endpoint to create an import job for a classification dataset. Creating an import job is required to produce a job ID that can be associated with an uploaded dataset file. 
+Use this endpoint to create an import job for a classification dataset. Creating an import job is required to produce a job ID that can be associated with an uploaded dataset file. For more information on classification jobs, see [Classification set jobs manager](https://experienceleague.adobe.com/docs/analytics/components/classifications/sets/job-manager.htm).
 
 `POST https://analytics.adobe.io/api/{GLOBALCOMPANYID}/classification/job/import/createApiJob/{DATASET_ID}`
 
@@ -94,7 +94,7 @@ The following table describes the POST create job response parameters:
 
 ## PUT upload file
 
-Use this endpoint to upload a file that will be associated with the job ID created with the POST create job endpoint. This file can be tsv, tab, or JSON. For more information on how to structure your classification files, see [Classification data files]
+Use this endpoint to upload a file that will be associated with the job ID created with the POST create job endpoint. This file can be tsv, tab, or JSON. For more information on how to structure your classification files, see [Classification data files](https://experienceleague.adobe.com/docs/analytics/components/classifications/classifications-importer/c-saint-data-files.html)
 
 `PUT https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/job/import/uploadFile/{API_JOB_ID}`
 
@@ -129,7 +129,7 @@ No response parameters are returned. A `200` status code indicates a successful 
 
 ## POST commit job
 
-Use this endpoint to commit the changes of a specified job ID. This endpoint finalizes the file uploading process.
+Use this endpoint to commit the changes of a specified job ID. This endpoint finalizes the file uploading process. For more information on classification jobs, see [Classification set jobs manager](https://experienceleague.adobe.com/docs/analytics/components/classifications/sets/job-manager.htm).
 
 `POST https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/job/import/commitApiJob/{API_JOB_ID}`
 
