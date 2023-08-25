@@ -274,7 +274,11 @@ curl -X POST "https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/
 
 ### Request example details
 
+The example above shows a cURL request to commit the job associated with the `api_job_id` of `a6fc824c-4d6f-45f9-8f55-456f918e0b41`.
+
 ### Response example details
+
+The example above shows the successful response for committing the job, including the `import_job_id` and `api_job_id`.
 
 ### Request Parameters
 
@@ -293,7 +297,7 @@ The following table describes the POST commit job response parameters:
 | `import_job_id` | string | The ID of the import job |
 | `api_job_id` | string | The API job ID for uploading the file. This ID was provided with the response of the POST create job endpoint. |
 
-After importing your classification datasets you can export them to other applications. [Analytics classifications APIs guide](classifications/index.md)
+After importing your classification datasets you can export them to other applications. See the [Analytics classification APIs guide](classifications/index.md) for more information.
 
 ## API status codes
 
