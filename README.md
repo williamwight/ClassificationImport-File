@@ -104,16 +104,16 @@ curl -X POST "https://analytics.adobe.io/api/{GLOBALCOMPANYID}/classification/jo
 
 The example request above creates an import job with the following specifications:
 
-* the `dataFormat` for the classification as `tsv`
-* the `jobName` to be `testsuite evar1 classifications`
+* the `dataFormat` for the classification as `tsv`.
+* the `jobName` to be `testsuite evar1 classifications`.
 * the notification will be delivered by `email` to `john@example.com` when the state is `completed`.
-* the data source is `"Direct API Upload"`
+* the data source is `Direct API Upload`.
 
 ### Response example details
 
 The example response above shows the following job creation information:
 
-* the `jobID` is `16e38fbc-fc82-4fdf-88de-ec33e63489d5`. This ID is necessary to both upload and commit the dataset with the other endpoints in this guide.
+* the `api_job_id` is `a6fc824c-4d6f-45f9-8f55-456f918e0b41`. This ID is necessary to both upload and commit the dataset with the other endpoints in this guide.
 * the notification details, including its `completed` state.
 
 ### Request Parameters
@@ -133,7 +133,7 @@ The following table describes the POST create job request parameters:
 | `statesWithQueuedNotifications` | optional | string | Notifications for queued states |
 | `listDelimiter` | optional | string | Specifies the data delimiter for the list. Default delimiter is `,` (comma) |
 | `pipelineTag` | optional | string | Pipeline tag |
-| `source` | optional | string | The data source. Default value is `"Direct API Upload"`. |
+| `source` | optional | string | The data source. Default value is `Direct API Upload`. |
 | `dataUri` | optional | string | The data URI |
 | `originalDataUri` | optional | string | The original data URI |
 | `keyOptions` | optional | container | Contains the `byte_length`, `type`, and `overwrite` parameters |
@@ -214,10 +214,14 @@ curl -X PUT "https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/j
 
 ### Request example details
 
-* the `Key` parameter is the file name of `example_file.tsv`
-* the `Value` parameter displays the file path of `example_file.tsv`
+The example above shows a cURL request with the following:
+
+* the `Key` parameter specified as the file name `example_file.tsv`
+* the `Value` parameter specified as the file path `/files/examples/example_file.tsv`
 
 ### Response example details
+
+The example response above shows a successful status for the upload.
 
 ### Request Parameters
 
@@ -225,9 +229,9 @@ The following table describes the PUT upload file request parameters:
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
-| `api_job_id` | required | string | The API job ID for uploading the file |
-| `Key` | required | string | The name of the file uploaded |
-| `Value` | required | string | The location of the file uploaded |
+| `api_job_id` | required | string | The API job ID for uploading the file. This ID was provided with the response of the POST create job endpoint. |
+| `Key` | required | string | The name of the uploaded file |
+| `Value` | required | string | The location of the uploaded file |
 
 ### Response Parameters
 
@@ -235,7 +239,7 @@ The following table describes the PUT upload file response parameters:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `api_job_id` | string | The ID of the API job |
+| `api_job_id` | string | The API job ID for uploading the file. This ID was provided with the response of the POST create job endpoint. |
 | `status` | string | The status of the API job |
 
 ## POST commit job
@@ -278,7 +282,7 @@ The following table describes the POST commit job request parameters:
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
-| `api_job_id` | required | string | The API job ID for uploading the file |
+| `api_job_id` | required | string | The API job ID for uploading the file. This ID was provided with the response of the POST create job endpoint. |
 
 ### Response Parameters
 
@@ -287,7 +291,7 @@ The following table describes the POST commit job response parameters:
 | Name | Type | Description |
 | --- | --- | --- |
 | `import_job_id` | string | The ID of the import job |
-| `api_job_id` | string | The ID of the API job |
+| `api_job_id` | string | The API job ID for uploading the file. This ID was provided with the response of the POST create job endpoint. |
 
 After importing your classification datasets you can export them to other applications. [Analytics classifications APIs guide](classifications/index.md)
 
