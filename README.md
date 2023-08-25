@@ -28,6 +28,79 @@ Use this endpoint to create an import job for a classification dataset. Creating
 Request and response examples
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
+<CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
+
+#### Request
+
+```sh
+curl -X POST "https://analytics.adobe.io/api/{GLOBALCOMPANYID}/classification/job/import/createApiJob/6449b63563c1e069c6159415" \
+     -H "x-api-key: {CLIENT_ID}" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer {ACCESS_TOKEN}" \
+     -d '{
+            "dataFormat": "tsv",
+            "encoding": "UTF8",
+            "jobName": "Direct API Upload for dataset testsuite evar1 classifications - 6449b63563c1e069c6159415 at 1690825563",
+            "notifications": [
+                {
+                "method": "email",
+                "state": "completed",
+                "recipients": [
+                    john@example.com
+                ]
+                }
+            ],
+            "listDelimiter": ",",
+            "source": "Direct API Upload",
+            "keyOptions": {
+                "byte_length": 0,
+                "type": "string"
+            }
+         }'
+```
+
+#### Response
+
+```JSON
+{
+  "api_job_id": "a6fc824c-4d6f-45f9-8f55-456f918e0b41",
+  "dataset_id": "6449b63563c1e069c6159415",
+  "ims_org_id": "0DFE76D95967D5B50A494010@AdobeOrg",
+  "api_job_status": "CREATED",
+  "job_options": {
+    "dataFormat": "tsv",
+    "encoding": "utf8",
+    "jobName": "Direct API Upload for dataset testsuite evar1 classifications - 6449b63563c1e069c6159415 at 1690825563",
+    "fileBasename": null,
+    "notifications": [
+      {
+        "method": "email",
+        "state": "completed",
+        "recipients": [
+          "john@example.com"
+        ]
+      }
+    ],
+    "statesWithQueuedNotifications": [],
+    "listDelimiter": ",",
+    "pipelineTag": "",
+    "source": "Direct API Upload",
+    "dataUri": null,
+    "originalDataUri": null,
+    "keyOptions": {
+      "byte_length": 255,
+      "type": "string"
+    },
+    "notification_extras": [
+      {
+        "key": "Report Suite",
+        "value": "testsuite"
+      }
+    ]
+  }
+}
+```
+
 ### Request example details
 
 ### Response example details
@@ -105,7 +178,34 @@ Use this endpoint to upload a file that will be associated with the job ID creat
 Request and response examples
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
+<CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
+
+#### Request
+
+```sh
+curl -X PUT "https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/job/import/uploadFile/a6fc824c-4d6f-45f9-8f55-456f918e0b41"
+     -H "x-api-key: {CLIENT_ID}" \
+     -H "Authorization: Bearer {ACCESS_TOKEN}" \
+     -H "Content-Type: multipart/form-data" \
+     -d '{
+        "Key": "example_file.tsv",
+        "Value": "/files/examples/example_file.tsv"
+         }' 
+```
+
+#### Response
+
+```json
+{
+    "api_job_id": "a6fc824c-4d6f-45f9-8f55-456f918e0b41",
+    "status": "success"
+}
+```
+
 ### Request example details
+
+* the `Key` parameter is the file name of `example_file.tsv`
+* the `Value` parameter displays the file path of `example_file.tsv`
 
 ### Response example details
 
@@ -116,18 +216,17 @@ The following table describes the PUT upload file request parameters:
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
 | `api_job_id` | required | string | The API job ID for uploading the file |
-
-### Payload
-
-```
-Content-Type: multipart/form-data
-Key: {FILE_NAME}
-Value: {FILE_PATH}
-```
+| `Key` | required | string | The name of the file uploaded |
+| `Value` | required | string | The location of the file uploaded |
 
 ### Response Parameters
 
-No response parameters are returned. A `200` status code indicates a successful upload.
+The following table describes the PUT upload file response parameters:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `api_job_id` | string | The ID of the API job |
+| `status` | string | The status of the API job |
 
 ## POST commit job
 
@@ -139,6 +238,26 @@ Use this endpoint to commit the changes of a specified job ID. This endpoint fin
 
 Request and response examples
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
+
+<CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
+
+#### Request
+
+```sh
+curl -X POST "https://analytics.adobe.io.api/{GLOBAL_COMPANY_ID}/classification/job/import/commitApiJob/a6fc824c-4d6f-45f9-8f55-456f918e0b41" \
+     -H "x-api-key: {CLIENT_ID}" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer {ACCESS_TOKEN}"
+```
+
+#### Response
+
+```json
+{
+  "import_job_id": "e11671f1-d352-4b34-bb95-3a26775ef334",
+  "api_job_id": "a6fc824c-4d6f-45f9-8f55-456f918e0b41"
+}
+```
 
 ### Request example details
 
@@ -154,7 +273,12 @@ The following table describes the POST commit job request parameters:
 
 ### Response Parameters
 
-No response parameters are returned. A `200` status code indicates a successful commit.
+The following table describes the POST commit job response parameters:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `import_job_id` | string | The ID of the import job |
+| `api_job_id` | string | The ID of the API job |
 
 After importing your classification datasets you can export them to other applications. [Analytics classifications APIs guide](classifications/index.md)
 
