@@ -25,7 +25,6 @@ Use this endpoint to create an import job for a classification dataset. Creating
 
 ### Request and Response Examples
 
-Request and response examples
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
 <CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
@@ -40,7 +39,7 @@ curl -X POST "https://analytics.adobe.io/api/{GLOBALCOMPANYID}/classification/jo
      -d '{
             "dataFormat": "tsv",
             "encoding": "UTF8",
-            "jobName": "Direct API Upload for dataset testsuite evar1 classifications - 6449b63563c1e069c6159415 at 1690825563",
+            "jobName": "testsuite evar1 classifications",
             "notifications": [
                 {
                 "method": "email",
@@ -70,7 +69,7 @@ curl -X POST "https://analytics.adobe.io/api/{GLOBALCOMPANYID}/classification/jo
   "job_options": {
     "dataFormat": "tsv",
     "encoding": "utf8",
-    "jobName": "Direct API Upload for dataset testsuite evar1 classifications - 6449b63563c1e069c6159415 at 1690825563",
+    "jobName": "testsuite evar1 classifications",
     "fileBasename": null,
     "notifications": [
       {
@@ -103,7 +102,19 @@ curl -X POST "https://analytics.adobe.io/api/{GLOBALCOMPANYID}/classification/jo
 
 ### Request example details
 
+The example request above creates an import job with the following specifications:
+
+* the `dataFormat` for the classification as `tsv`
+* the `jobName` to be `testsuite evar1 classifications`
+* the notification will be delivered by `email` to `john@example.com` when the state is `completed`.
+* the data source is `"Direct API Upload"`
+
 ### Response example details
+
+The example response above shows the following job creation information:
+
+* the `jobID` is `16e38fbc-fc82-4fdf-88de-ec33e63489d5`. This ID is necessary to both upload and commit the dataset with the other endpoints in this guide.
+* the notification details, including its `completed` state.
 
 ### Request Parameters
 
@@ -114,14 +125,14 @@ The following table describes the POST create job request parameters:
 | `dataFormat` | required | string | The data format options. Includes `tsv`, `tab`, or `json`. |
 | `encoding` | optional | string | The encoding for data. The default value is `UTF-8`. |
 | `jobName` | optional | string | The name of the job |
-| `fileBasename` | optional | string |  |
+| `fileBasename` | optional | string | The name of the file currently being read, without path or extension |
 | `notifications` | optional | container | Contains the notification information. Includes the `method`, `state`, and `recipients` parameters. |
 | `method` | optional | string | The method by which the notification is sent. This includes the enums `email` and `rabbit`. |
 | `state` | optional | string | The state of the notification. Includes the following enums: `created`, `queued`, `validated`, `failed_validation`, `processing`, `done_processing`, `failed_processing`, and `completed`. |
 | `recipients` | optional | string | The recipients of the notification |
-| `statesWithQueuedNotifications` | optional | string |  |
+| `statesWithQueuedNotifications` | optional | string | Notifications for queued states |
 | `listDelimiter` | optional | string | Specifies the data delimiter for the list. Default delimiter is `,` (comma) |
-| `pipelineTag` | optional | string |  |
+| `pipelineTag` | optional | string | Pipeline tag |
 | `source` | optional | string | The data source. Default value is `"Direct API Upload"`. |
 | `dataUri` | optional | string | The data URI |
 | `originalDataUri` | optional | string | The original data URI |
@@ -130,8 +141,8 @@ The following table describes the POST create job request parameters:
 | `type` | optional | string | The type of the job |
 | `overwrite` | optional | boolean | Whether or not the import will overwrite. |
 | `notification_extras` | optional | container | Extra options for notifications. Contains the `key`, and `value` parameters. |
-| `key` | optional | string |  |
-| `value` | optional | string |  |
+| `key` | optional | string | The field or column name associated with key value |
+| `value` | optional | string | The actual value of the key (as in a field or column name)  |
 
 ### Response Parameters
 
@@ -143,19 +154,19 @@ The following table describes the POST create job response parameters:
 | `dataset_id` | string | Classification dataset ID |
 | `api_job_id` | string | The API Job ID for uploading the file |
 | `ims_org_id` | string | The ID associated with the analytics company of the user |
-| `taxonomist_job_id` | string |  |
+| `taxonomist_job_id` | string | Job ID for taxonomist |
 | `job_options` | container | Contains the options for jobs. Includes the `dataFormat`, `encoding`, `jobName`, `fileBasename`, and `notifications` parameters as shown in the following five rows. |
 | `dataFormat` | string | The data format options. Includes `tsv`, `tab`, or `json`. |
 | `encoding` | string | The encoding for data. The default value is `UTF-8`. |
 | `jobName` | string | The name of the job |
-| `fileBasename` | string |  |
+| `fileBasename` | string | The name of the file currently being read, without path or extension |
 | `notifications` | container | Contains the notification information. Includes the `method`, `state`, and `recipients` parameters. |
 | `method` | string | The method by which the notification is sent. This includes the enums `email` and `rabbit`. |
 | `state` | string | The state of the notification. Includes the following enums: `created`, `queued`, `validated`, `failed_validation`, `processing`, `done_processing`, `failed_processing`, and `completed`. |
 | `recipients` | string | The recipients of the notification |
-| `statesWithQueuedNotifications` | string |  |
+| `statesWithQueuedNotifications` | string | Notifications for queued states |
 | `listDelimiter` | string | Specifies the data delimiter for the list. Default delimiter is `,` (comma) |
-| `pipelineTag` | string |  |
+| `pipelineTag` | string | Pipeline tag |
 | `source` | string | The data source. Default value is `"Direct API Upload"`. |
 | `dataUri` | string | The data URI |
 | `originalDataUri` | string | The original data URI |
@@ -164,8 +175,8 @@ The following table describes the POST create job response parameters:
 | `type` | string | The type of the job |
 | `overwrite` | boolean | Whether or not the import will overwrite. |
 | `notification_extras` | container | Extra options for notifications. Contains the `key`, and `value` parameters. |
-| `key` | string |  |
-| `value` | string |  |
+| `key` | string | The field or column name associated with key value |
+| `value` | string | The actual value of the key (as in a field or column name) |
 
 ## PUT upload file
 
@@ -175,7 +186,6 @@ Use this endpoint to upload a file that will be associated with the job ID creat
 
 ### Request and Response Examples
 
-Request and response examples
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
 <CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
@@ -236,7 +246,6 @@ Use this endpoint to commit the changes of a specified job ID. This endpoint fin
 
 ### Request and Response Examples
 
-Request and response examples
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
 <CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
